@@ -350,11 +350,11 @@ ifeq ($(USE_FMOD),0)' \
     mkdir -p $out/include/openFrameworks
     # Copy the main header
     cp libs/openFrameworks/ofMain.h $out/include/openFrameworks/
-    # Copy all subdirectory headers
+    # Copy all subdirectory headers (including .inl inline implementation files)
     for dir in 3d app communication events gl graphics math sound types utils video; do
       if [ -d "libs/openFrameworks/$dir" ]; then
         mkdir -p "$out/include/openFrameworks/$dir"
-        find "libs/openFrameworks/$dir" -name "*.h" -exec cp {} "$out/include/openFrameworks/$dir/" \;
+        find "libs/openFrameworks/$dir" \( -name "*.h" -o -name "*.inl" \) -exec cp {} "$out/include/openFrameworks/$dir/" \;
       fi
     done
 
